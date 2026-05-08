@@ -4,410 +4,216 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BlackCrown Barbershop | Premium Gentleman</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 
   <style>
-    /* ===== THEME & VARIABLES ===== */
     :root {
-      --bg: #0f0f0f;
+      --bg: #0a0a0a;
       --text: #ffffff;
-      --card: rgba(21, 21, 21, 0.8);
+      --card: rgba(25, 25, 25, 0.6);
       --accent: #c9a14a;
       --accent-hover: #e0b355;
+      --glass-border: rgba(255, 255, 255, 0.1);
     }
 
     .light {
-      --bg: #f5f5f5;
-      --text: #111111;
-      --card: rgba(255, 255, 255, 0.9);
+      --bg: #f8f9fa;
+      --text: #1a1a1a;
+      --card: rgba(255, 255, 255, 0.8);
+      --glass-border: rgba(0, 0, 0, 0.1);
     }
 
-    /* ===== GLOBAL STYLE ===== */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
 
     body {
       background: var(--bg);
       color: var(--text);
-      transition: background 0.4s, color 0.4s;
+      transition: background 0.5s ease;
       overflow-x: hidden;
     }
 
-    /* ===== HERO SECTION ===== */
+    /* Navbar */
+    nav {
+      position: fixed;
+      top: 0; width: 100%;
+      padding: 20px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      background: rgba(10, 10, 10, 0.1);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    .logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--accent); letter-spacing: 2px; }
+
+    /* Hero Section */
     .hero {
       height: 100vh;
-      position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 0 20px;
-    }
-
-    .hero video {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: -2;
-    }
-
-    .hero::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.8));
-      z-index: -1;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&q=80&w=2070') no-repeat center center/cover;
     }
 
     .hero h1 {
-      font-size: clamp(2.5rem, 8vw, 4rem);
-      font-weight: 700;
-      letter-spacing: 2px;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 10vw, 5rem);
       margin-bottom: 10px;
-      text-transform: uppercase;
+      line-height: 1;
     }
 
-    .hero p {
-      color: #ddd;
-      font-size: 1.2rem;
-      margin-bottom: 30px;
-      letter-spacing: 1px;
-    }
+    .hero p { color: var(--accent); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 30px; font-weight: 300; }
 
-    .hero a {
-      padding: 15px 35px;
-      border: 2px solid var(--accent);
+    .btn-gold {
+      padding: 15px 40px;
+      background: transparent;
+      border: 1px solid var(--accent);
       color: var(--accent);
-      border-radius: 50px;
       text-decoration: none;
       font-weight: 600;
-      transition: 0.3s;
-      display: inline-block;
-    }
-
-    .hero a:hover {
-      background: var(--accent);
-      color: #000;
-      transform: translateY(-3px);
-    }
-
-    /* ===== SECTION GENERAL ===== */
-    section {
-      padding: 100px 20px;
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    .section-title {
-      text-align: center;
-      margin-bottom: 60px;
-    }
-
-    .section-title h2 {
-      color: var(--accent);
-      font-size: 2.5rem;
-      position: relative;
-      display: inline-block;
-      padding-bottom: 10px;
-    }
-
-    .section-title h2::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 60px;
-      height: 3px;
-      background: var(--accent);
-    }
-
-    /* ===== ABOUT SECTION ===== */
-    .about-wrap {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 50px;
-      align-items: center;
-    }
-
-    .about-img {
-      width: 100%;
-      height: 400px;
-      overflow: hidden;
-      border-radius: 20px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-    }
-
-    .about-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .about-text {
-      line-height: 1.8;
-      font-size: 1.1rem;
-      color: #bbb;
-    }
-
-    /* ===== SERVICES (GLASSMORPHISM) ===== */
-    .grid { display: grid; gap: 25px; }
-    .grid-3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
-
-    .card {
-      background: var(--card);
-      backdrop-filter: blur(10px);
-      padding: 40px;
-      border-radius: 20px;
-      text-align: center;
-      border: 1px solid rgba(255,255,255,0.1);
-      transition: 0.3s;
-    }
-
-    .card:hover {
-      transform: translateY(-10px);
-      border-color: var(--accent);
-    }
-
-    .card h3 { color: var(--accent); margin-bottom: 10px; }
-    .card p { font-size: 1.5rem; font-weight: 700; }
-
-    /* ===== GALLERY ===== */
-    .gallery img {
-      width: 100%;
-      aspect-ratio: 1/1;
-      object-fit: cover;
-      border-radius: 15px;
-      cursor: pointer;
+      border-radius: 2px;
       transition: 0.4s;
+      text-transform: uppercase;
+      letter-spacing: 2px;
     }
 
-    .gallery img:hover { transform: scale(1.03); filter: brightness(1.1); }
+    .btn-gold:hover { background: var(--accent); color: #000; box-shadow: 0 0 20px rgba(201, 161, 74, 0.4); }
 
-    /* ===== TESTIMONI SLIDER ===== */
-    .slider { overflow: hidden; max-width: 800px; margin: auto; }
-    .slides { display: flex; transition: 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
-    .testi {
-      min-width: 100%;
-      padding: 40px;
-      text-align: center;
+    /* Section Styling */
+    section { padding: 100px 5%; max-width: 1200px; margin: auto; }
+    .section-title { text-align: center; margin-bottom: 50px; }
+    .section-title h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 15px; }
+    .section-title .line { width: 50px; height: 3px; background: var(--accent); margin: auto; }
+
+    /* Services List */
+    .service-list {
+      display: grid;
+      gap: 30px;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+
+    .service-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed var(--glass-border);
+    }
+
+    .service-item h3 { font-size: 1.1rem; font-weight: 400; }
+    .service-item .price { color: var(--accent); font-weight: 700; }
+
+    /* Booking Form - Glass */
+    .booking-card {
       background: var(--card);
-      border-radius: 25px;
-    }
-    .stars { color: gold; margin-bottom: 15px; font-size: 1.4rem; }
-
-    /* ===== BOOKING FORM ===== */
-    .booking-container {
-      max-width: 600px;
+      backdrop-filter: blur(15px);
+      padding: 50px;
+      border-radius: 4px;
+      border: 1px solid var(--glass-border);
+      max-width: 700px;
       margin: auto;
-      background: var(--card);
-      padding: 40px;
-      border-radius: 25px;
     }
 
     input, select {
       width: 100%;
       padding: 15px;
-      margin: 12px 0;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,0.1);
+      margin: 10px 0;
       background: rgba(255,255,255,0.05);
+      border: 1px solid var(--glass-border);
       color: var(--text);
-      outline: none;
+      border-radius: 4px;
     }
 
-    button.btn-booking {
-      background: var(--accent);
-      color: #000;
-      font-weight: 700;
-      border: none;
-      cursor: pointer;
-      font-size: 1rem;
-      margin-top: 20px;
-      transition: 0.3s;
-    }
-
-    button.btn-booking:hover { background: var(--accent-hover); letter-spacing: 1px; }
-
-    /* ===== FLOATING BUTTONS ===== */
-    .controls {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      z-index: 1000;
-    }
-
-    .f-btn {
-      background: var(--card);
-      backdrop-filter: blur(5px);
-      width: 50px;
-      height: 50px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      cursor: pointer;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-      font-size: 1.2rem;
-    }
+    .controls { position: fixed; bottom: 30px; left: 30px; display: flex; gap: 10px; z-index: 1001; }
+    .f-btn { width: 45px; height: 45px; background: var(--accent); color: #000; display: flex; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer; border: none; }
 
     .wa-float {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      background: #25D366;
-      color: white;
-      padding: 15px 25px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: 600;
-      box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
-      z-index: 1000;
-      transition: 0.3s;
+      position: fixed; bottom: 30px; right: 30px;
+      background: #25D366; color: #fff; padding: 15px 25px;
+      border-radius: 50px; text-decoration: none; font-weight: 600;
+      z-index: 1001; box-shadow: 0 10px 20px rgba(0,0,0,0.2);
     }
 
-    /* ===== ANIMATIONS ===== */
-    .fade { opacity: 0; transform: translateY(40px); transition: 1s ease-out; }
+    .fade { opacity: 0; transform: translateY(30px); transition: 0.8s ease-out; }
     .fade.show { opacity: 1; transform: none; }
-
-    /* ===== RESPONSIVE ===== */
-    @media(max-width: 768px) {
-      .about-wrap { grid-template-columns: 1fr; }
-      .about-img { height: 300px; }
-      section { padding: 60px 20px; }
-    }
   </style>
 </head>
-
 <body>
 
-  <div class="controls">
-    <div class="f-btn" onclick="toggleMode()">🌗</div>
-    <div class="f-btn" onclick="toggleMusic()">🎵</div>
-  </div>
-
-  <audio id="bgMusic" loop>
-    <source src="music.mp3" type="audio/mpeg">
-  </audio>
+  <nav>
+    <div class="logo">BLACKCROWN</div>
+    <div style="display: flex; gap: 20px;">
+        <a href="#booking" class="btn-gold" style="padding: 8px 20px; font-size: 0.8rem;">Book Now</a>
+    </div>
+  </nav>
 
   <div class="hero">
-    <video autoplay muted loop playsinline src="video/bg.mp4"></video>
     <div class="hero-content">
-      <h1>BLACKCROWN</h1>
-      <p>Premium Barbershop Experience</p>
-      <a href="#booking">BOOK AN APPOINTMENT</a>
+      <p>The Art of Grooming</p>
+      <h1>Look Sharp, <br> Feel Premium.</h1>
+      <br>
+      <a href="#booking" class="btn-gold">Experience Now</a>
     </div>
   </div>
 
   <section class="fade">
-    <div class="section-title"><h2>Tentang Kami</h2></div>
-    <div class="about-wrap">
-      <div class="about-img">
-        <img src="images/galeri1.jpg" alt="Barbershop Interior">
-      </div>
-      <div class="about-text">
-        <p>
-          BlackCrown Barbershop bukan sekadar tempat potong rambut biasa. Kami adalah destinasi bagi pria yang menghargai detail dan kualitas. 
-          Setiap barber kami dilatih untuk memahami struktur wajah dan karakter rambut Anda guna memberikan hasil yang paling pas.
-          Nikmati layanan premium kami dengan atmosfer yang rileks dan eksklusif.
-        </p>
-      </div>
+    <div class="section-title">
+      <h2>Premium Services</h2>
+      <div class="line"></div>
     </div>
-  </section>
-
-  <section class="fade">
-    <div class="section-title"><h2>Layanan</h2></div>
-    <div class="grid grid-3">
-      <div class="card">
-        <h3>Haircut Premium</h3>
-        <p>Rp30.000</p>
-        <small>Wash, Cut, & Styling</small>
+    <div class="service-list">
+      <div class="service-item">
+        <h3>Gentleman Haircut</h3>
+        <span class="price">Rp35k</span>
       </div>
-      <div class="card">
-        <h3>Fade Styling</h3>
-        <p>Rp40.000</p>
-        <small>Modern Gradient Fade</small>
+      <div class="service-item">
+        <h3>Signature Fade</h3>
+        <span class="price">Rp45k</span>
       </div>
-      <div class="card">
-        <h3>Beard Trim</h3>
-        <p>Rp20.000</p>
-        <small>Shape & Grooming</small>
+      <div class="service-item">
+        <h3>Royal Shave</h3>
+        <span class="price">Rp25k</span>
       </div>
-    </div>
-  </section>
-
-  <section class="fade">
-    <div class="section-title"><h2>Galeri</h2></div>
-    <div class="grid grid-3 gallery">
-      <img src="images/galeri1.jpg">
-      <img src="images/galeri2.jpg">
-      <img src="images/galeri3.jpg">
-      <img src="images/galeri4.jpg">
-      <img src="images/galeri5.jpg">
-      <img src="images/galeri6.jpg">
-    </div>
-  </section>
-
-  <section class="fade">
-    <div class="section-title"><h2>Testimoni</h2></div>
-    <div class="slider">
-      <div class="slides" id="slides">
-        <div class="testi">
-          <div class="stars">★★★★★</div>
-          <p>"Potongan paling rapi yang pernah saya dapatkan. Barbernya sangat detail!"</p>
-          <br><strong>- Andi Wijaya</strong>
-        </div>
-        <div class="testi">
-          <div class="stars">★★★★★</div>
-          <p>"Tempatnya keren banget, pelayanannya premium tapi harga tetap ramah dikantong."</p>
-          <br><strong>- Budi Santoso</strong>
-        </div>
-        <div class="testi">
-          <div class="stars">★★★★★</div>
-          <p>"Sudah langganan di sini. Tidak pernah kecewa sama hasilnya."</p>
-          <br><strong>- Rian Pratama</strong>
-        </div>
+      <div class="service-item">
+        <h3>Black Mask Therapy</h3>
+        <span class="price">Rp30k</span>
+      </div>
+      <div class="service-item">
+        <h3>Hair Coloring</h3>
+        <span class="price">Rp75k+</span>
+      </div>
+      <div class="service-item">
+        <h3>Complete Grooming</h3>
+        <span class="price">Rp100k</span>
       </div>
     </div>
   </section>
 
   <section id="booking" class="fade">
-    <div class="section-title"><h2>Online Booking</h2></div>
-    <div class="booking-container">
-      <input id="nama" type="text" placeholder="Masukkan Nama Anda">
+    <div class="booking-card">
+      <div class="section-title">
+        <h2>Make a Reservation</h2>
+        <p style="font-size: 0.9rem; opacity: 0.7;">Amankan kursi Anda tanpa antre</p>
+      </div>
+      <input type="text" id="nama" placeholder="Full Name">
       <select id="layanan">
-        <option value="Haircut Premium">Haircut Premium (Rp30k)</option>
-        <option value="Fade Styling">Fade Styling (Rp40k)</option>
-        <option value="Beard Trim">Beard Trim (Rp20k)</option>
-      </select>
-      <select id="dp">
-        <option value="DP Rp10.000">Bayar DP Rp10.000</option>
-        <option value="DP Rp20.000">Bayar DP Rp20.000</option>
+        <option value="Gentleman Haircut">Gentleman Haircut (35k)</option>
+        <option value="Signature Fade">Signature Fade (45k)</option>
+        <option value="Complete Grooming">Complete Grooming (100k)</option>
       </select>
       <input type="date" id="tanggal">
-      <button class="btn-booking" onclick="sendWA()">KONFIRMASI VIA WHATSAPP</button>
+      <button class="btn-gold" style="width: 100%; margin-top: 20px; cursor: pointer;" onclick="sendWA()">Confirm Via WhatsApp</button>
     </div>
   </section>
 
-  <a class="wa-float" href="https://wa.me/628xxxxxxxxxx" target="_blank">💬 Chat Kami</a>
+  <div class="controls">
+    <button class="f-btn" onclick="toggleMode()">🌗</button>
+  </div>
+
+  <a href="https://wa.me/628xxxxxxxxxx" class="wa-float">💬 Chat Specialist</a>
 
   <script>
     // Theme Toggle
@@ -415,49 +221,34 @@
       document.body.classList.toggle("light");
     }
 
-    // Music Toggle
-    let music = document.getElementById("bgMusic");
-    function toggleMusic() {
-      music.paused ? music.play() : music.pause();
-    }
-
-    // Scroll Animation (Fade In)
-    const observerOptions = { threshold: 0.1 };
+    // Scroll Fade Animation
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("show");
-        }
+        if (entry.isIntersecting) entry.target.classList.add("show");
       });
-    }, observerOptions);
+    }, { threshold: 0.1 });
 
     document.querySelectorAll(".fade").forEach(el => observer.observe(el));
 
-    // Testimonial Slider
-    let index = 0;
-    const slides = document.getElementById("slides");
-    setInterval(() => {
-      index = (index + 1) % 3;
-      slides.style.transform = `translateX(-${index * 100}%)`;
-    }, 4000);
+    // Set Min Date to Today
+    const dateInput = document.getElementById('tanggal');
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.setAttribute('min', today);
 
-    // WhatsApp Integration
+    // WhatsApp Function
     function sendWA() {
       const nama = document.getElementById("nama").value;
       const layanan = document.getElementById("layanan").value;
-      const dp = document.getElementById("dp").value;
       const tanggal = document.getElementById("tanggal").value;
       
       if(!nama || !tanggal) {
-        alert("Harap isi nama dan tanggal booking!");
+        alert("Please fill in your name and preferred date.");
         return;
       }
 
-      let message = `Halo BlackCrown!%0A%0ASaya ingin booking jadwal:%0A*Nama*: ${nama}%0A*Layanan*: ${layanan}%0A*Tanggal*: ${tanggal}%0A*Status*: ${dp}%0A%0AMohon konfirmasinya, terima kasih.`;
-      
+      let message = `Halo BlackCrown!%0A%0ASaya ingin booking jadwal:%0A*Nama*: ${nama}%0A*Layanan*: ${layanan}%0A*Tanggal*: ${tanggal}%0A%0AMohon konfirmasinya.`;
       window.open(`https://wa.me/628xxxxxxxxxx?text=${message}`, '_blank');
     }
   </script>
-
 </body>
 </html>
