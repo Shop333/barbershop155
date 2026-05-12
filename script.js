@@ -3,13 +3,15 @@ function toggleMode() {
   document.body.classList.toggle("light");
 }
 
-// Music Toggle
+// Music Toggle dengan Error Handling (Mencegah error jika audio belum terload)
 const music = document.getElementById("bgMusic");
 function toggleMusic() {
-  if (music.paused) {
-    music.play();
-  } else {
-    music.pause();
+  if (music) {
+    if (music.paused) {
+      music.play().catch(error => console.log("Autoplay dicegah oleh browser. Klik lagi!"));
+    } else {
+      music.pause();
+    }
   }
 }
 
@@ -28,31 +30,51 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll(".fade").forEach(el => observer.observe(el));
 
-// Testimonial Auto Slider
+// Testimonial Auto Slider (Smooth Transition)
 let index = 0;
 const slides = document.getElementById("slides");
-if (slides) {
+const totalTesti = document.querySelectorAll(".testi").length;
+
+if (slides && totalTesti > 0) {
   setInterval(() => {
-    index = (index + 1) % 3; // Sesuaikan angka 3 dengan jumlah testimoni
+    index = (index + 1) % totalTesti;
     slides.style.transform = `translateX(-${index * 100}%)`;
   }, 4000);
 }
 
+// Validasi Tanggal (Mencegah booking tanggal yang sudah lewat)
+const inputTanggal = document.getElementById("tanggal");
+if (inputTanggal) {
+  const today = new Date().toISOString().split('T')[0];
+  inputTanggal.setAttribute('min', today);
+}
+
 // WhatsApp Booking Integration
 function sendWA() {
-  const nama = document.getElementById("nama").value;
+  const nama = document.getElementById("nama").value.trim();
   const layanan = document.getElementById("layanan").value;
   const dp = document.getElementById("dp").value;
   const tanggal = document.getElementById("tanggal").value;
   
   if(!nama || !tanggal) {
-    alert("Harap isi nama dan tanggal booking!");
+    alert("Mohon lengkapi Nama dan Pilih Tanggal booking!");
     return;
   }
 
-  // Ganti nomor di bawah dengan nomor WhatsApp aktif toko Anda
+  // Masukkan nomor WhatsApp Barbershop di sini (Gunakan kode negara 62)
   const phone = "628xxxxxxxxxx"; 
-  const message = `Halo BlackCrown!%0A%0ASaya ingin booking jadwal:%0A*Nama*: ${nama}%0A*Layanan*: ${layanan}%0A*Tanggal*: ${tanggal}%0A*Status*: ${dp}%0A%0AMohon konfirmasinya, terima kasih.`;
   
-  window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
+  // Format pesan yang lebih rapi
+  const text = `*KONFIRMASI BOOKING BLACKCROWN*%0A` +
+               `------------------------------------%0A` +
+               `*Nama* : ${nama}%0A` +
+               `*Layanan* : ${layanan}%0A` +
+               `*Tanggal* : ${tanggal}%0A` +
+               `*Status* : ${dp}%0A` +
+               `------------------------------------%0A` +
+               `Mohon segera dikonfirmasi ya, Admin. Terima kasih!`;
+  
+  const waURL = `https://wa.me/${phone}?text=${text}`;
+  
+  window.open(waURL, '_blank');
 }
